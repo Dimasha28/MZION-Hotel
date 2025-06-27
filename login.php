@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>Mzion hotel </title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <!-- style css -->
+      <link rel="stylesheet" href="css/style.css">
+      <!-- Responsive-->
+      <link rel="stylesheet" href="css/responsive.css">
+      <!-- fevicon -->
+      <link rel="icon" href="images/fevicon.png" type="image/gif" />
+      <!-- Scrollbar Custom CSS -->
+      <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+      <!-- Tweaks for older IEs-->
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+      <body class="main-layout">
+        <!-- loader  -->
+        <div class="loader_bg">
+           <div class="loader"><img src="images/loading.gif" alt="#"/></div>
+        </div>
+        <!-- end loader -->
+        <!-- header -->
+        <header>
+           <!-- header inner -->
+           <div class="header">
+              <div class="container">
+                 <div class="row">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+                       <div class="full">
+                          <div class="center-desk">
+                             
+                          </div>
+                       </div>
+                    </div>
+                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                       <nav class="navigation navbar navbar-expand-md navbar-dark ">
+                          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                          </button>
+                          <div class="collapse navbar-collapse" id="navbarsExample04">
+                             <ul class="navbar-nav mr-auto">
+                                <li class="nav-item ">
+                                   <a class="nav-link" href="index.html">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                   <a class="nav-link" href="about.html">About</a>
+                                </li>
+                                <li class="nav-item active">
+                                   <a class="nav-link" href="room.html">Our room</a>
+                                </li>
+                                <li class="nav-item">
+                                   <a class="nav-link" href="gallery.html">Gallery</a>
+                                </li>
+                                <li class="nav-item">
+                                   <a class="nav-link" href="blog.html">Blog</a>
+                                </li>
+                                <li class="nav-item">
+                                   <a class="nav-link" href="contact.html">Contact Us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="login.html">Login</a>
+                                 </li>
+                             </ul>
+                          </div>
+                       </nav>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </header>
+      <style>
+        .form-container h1 {
+           text-align: center;
+         }
+         form, .content {
+       width: 30%;
+       margin: 0px auto;
+       padding: 20px;
+       border: 1px solid #B0C4DE;
+       background: black;
+       border-radius: 0px 0px 10px 10px;
+     }
+     .input-group {
+       margin: 10px 0px 10px 0px;
+     }
+     .input-group label {
+       display: block;
+       text-align: left;
+       margin: 3px;
+     }
+     .input-group input {
+       height: 30px;
+       width: 93%;
+       padding: 5px 10px;
+       font-size: 16px;
+       border-radius: 5px;
+       border: 1px solid gray;
+     }
+     .btn {
+       padding: 10px;
+       font-size: 15px;
+       color: white;
+       background: #5F9EA0;
+       border: none;
+       border-radius: 5px;
+     }
+     .error {
+       width: 92%; 
+       margin: 0px auto; 
+       padding: 10px; 
+       border: 1px solid #a94442; 
+       color: #a94442; 
+       background: #f2dede; 
+       border-radius: 5px; 
+       text-align: left;
+     }
+     .success {
+       color: #3c763d; 
+       background: #dff0d8; 
+       border: 1px solid #3c763d;
+       margin-bottom: 20px;
+     
+         }
+       </style>
+   </head>
+   <main id="main">
+    <section class="breadcrumbs">
+      <div class="container">
+<div class="form-container">
+
+
+<?php
+session_start();
+include 'db.php';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // Use prepared statements for security
+    $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if (!$result) {
+        die("Query failed: " . $conn->error);
+    }
+
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+        if (password_verify($password, $user['password'])) {
+            $_SESSION['user_id'] = $user['id'];
+
+            // Show success message and redirect to home
+            echo "<script>
+                    alert('Login successful!');
+                    window.location.href = 'index.html';
+                  </script>";
+            exit();
+        } else {
+            echo "<script>alert('Invalid password. Please try again.');</script>";
+        }
+    } else {
+        echo "<script>alert('User not found. Please register first.');</script>";
+    }
+    $stmt->close();
+}
+?>
+
+
+
+  </form>
+  <footer>
+    <div class="footer">
+       <div class="container">
+          <div class="row">
+             <div class=" col-md-4">
+                <h3>Contact US</h3>
+                <ul class="conta">
+                   <li><i class="fa fa-map-marker" aria-hidden="true"></i> Mzion hotel road, Matara, Waligama </li>
+                   <li><i class="fa fa-mobile" aria-hidden="true"></i> +94 715151515</li>
+                   <li> <i class="fa fa-envelope" aria-hidden="true"></i><a href="#"> Mzionhotel@gmail.com</a></li>
+                </ul>
+             </div>
+             <div class="col-md-4">
+                <h3>Menu Link</h3>
+                <ul  class="link_menu">
+                   <li><a href="#">Home</a></li>
+                   <li  class="active"><a href="about.html"> about</a></li>
+                   <li><a href="room.html">Our Room</a></li>
+                   <li><a href="gallery.html">Gallery</a></li>
+                   <li><a href="blog.html">Blog</a></li>
+                   <li><a href="contact.html">Contact Us</a></li>
+                   <li><a href="login.html">Login</a></li>
+                </ul>
+             </div>
+             <div class="col-md-4">
+                <h3>News letter</h3>
+                <form class="bottom_form">
+                   <input class="enter" placeholder="Enter your email" type="text" name="Enter your email">
+                   <button class="sub_btn">subscribe</button>
+                </form>
+                <ul class="social_icon">
+                   <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                   <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                   <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                   <li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+                </ul>
+             </div>
+          </div>
+       </div>
+       <div class="copyright">
+          <div class="container">
+             <div class="row">
+                <div class="col-md-10 offset-md-1">
+                   <p>
+                      © 2025 All Rights Reserved. Design by <a href="https://html.design/"> </a>
+                      <br><br>
+                      Distributed by <a href="https://themewagon.com/" target="_blank"></a>
+                      </p>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </footer>
+ <!-- end footer -->
+ <!-- Javascript files-->
+ <script src="js/jquery.min.js"></script>
+ <script src="js/bootstrap.bundle.min.js"></script>
+ <script src="js/jquery-3.0.0.min.js"></script>
+ <!-- sidebar -->
+ <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+ <script src="js/custom.js"></script>
+</body>
+</html>                                                                                               
