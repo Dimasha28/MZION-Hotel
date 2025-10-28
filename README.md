@@ -1,6 +1,59 @@
-# MZION-Hotel
-Web Site Link
-https://mzionhotel.netlify.app/
+# 🏨 Mzion Hotel Management System
+
+Welcome to **Mzion Hotel Management System** — a modern web-based platform designed to simplify hotel operations and enhance guest experience.  
+This project focuses on providing an efficient and user-friendly interface for managing bookings, customers, rooms, and staff operations.
+
+🔗 **Live Demo:** [https://mzionhotel.netlify.app](https://mzionhotel.netlify.app/)
+
+---
+
+## ✨ Features
+
+### 👤 Guest / Customer
+- View available rooms and packages  
+- Make online bookings and payments  
+- Manage personal reservations  
+- Receive booking confirmations instantly  
+
+### 🏢 Admin / Hotel Management
+- Manage rooms, bookings, and customers  
+- Monitor check-ins and check-outs  
+- View and generate reports (occupancy, revenue, etc.)  
+- Handle staff and service management  
+
+### 🧾 Other Features
+- Secure login and authentication system  
+- Dynamic room availability updates  
+- Interactive and responsive UI  
+- Fully integrated payment section (if enabled)
+
+---
+
+## 🧠 Technologies Used
+
+| Layer | Technology |
+|-------|-------------|
+| **Frontend** | HTML5, CSS3, JavaScript |
+| **Frameworks / Libraries** | React.js / Vanilla JS (depending on implementation) |
+| **Backend (Optional)** | Node.js / Firebase / PHP (depending on your version) |
+| **Database** | MySQL / Firebase Realtime DB |
+| **Hosting** | Netlify |
+| **Version Control** | Git + GitHub |
+
+---
+
+## ⚙️ Installation & Setup
+
+### Prerequisites
+- Node.js (v14+)
+- npm or yarn
+- Internet connection for API dependencies
+
+### Steps
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/mzion-hotel-management.git
+   cd mzion-hotel-management
 
 
 ![Screenshot 2025-06-07 210108](https://github.com/user-attachments/assets/2d500a30-ff83-4f99-89cf-8f78e9f5d3dd)
