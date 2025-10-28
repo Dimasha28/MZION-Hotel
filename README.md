@@ -52,7 +52,7 @@ This project focuses on providing an efficient and user-friendly interface for m
 ### Steps
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/mzion-hotel-management.git
+   git clone https://github.com/Dimasha28/mzion-hotel-management.git
    cd mzion-hotel-management
 
 
